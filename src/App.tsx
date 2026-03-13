@@ -6,6 +6,8 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import UserProfile from "./components/UserProfile";
+
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.email({ message: "Invalid email address" }),
@@ -47,6 +49,7 @@ function App() {
           validación.
         </div>
       )}
+      <UserProfile />
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         {/* Name field */}
         <div style={{ marginBottom: 16 }}>

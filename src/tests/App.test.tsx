@@ -16,7 +16,9 @@ describe("App form", () => {
   it("renders all fields and the submit button", () => {
     expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/accept terms/i)).toBeInTheDocument();
+    const checkbox = screen.getByRole("checkbox", { name: /accept terms/i });
+    expect(checkbox).toBeInTheDocument();
+    expect(checkbox).not.toBeChecked();
     expect(screen.getByRole("button", { name: /submit/i })).toBeInTheDocument();
   });
 

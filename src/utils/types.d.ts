@@ -8,3 +8,8 @@ type Category = {
   id: number;
   name: string;
 };
+
+type UserServer = {
+  name: string;
+  email: string;
+};
