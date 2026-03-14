@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import UserProfile from "./components/UserProfile";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -35,66 +36,68 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto" }}>
-      <h1>Simple React Hook Form</h1>
-      <p
-        onMouseEnter={() => setShowInfo(true)}
-        onMouseLeave={() => setShowInfo(false)}
-      >
-        Mas info
-      </p>
-      {showInfo && (
-        <div>
-          Este es un formulario de ejemplo usando React Hook Form y Zod para
-          validación.
-        </div>
-      )}
-      <UserProfile />
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        {/* Name field */}
-        <div style={{ marginBottom: 16 }}>
-          <label htmlFor="name">Name:</label>
-          <input
-            id="name"
-            type="text"
-            {...register("name")}
-            style={{ display: "block", width: "100%" }}
-          />
-          {errors.name && (
-            <span style={{ color: "red" }}>{errors.name.message}</span>
-          )}
-        </div>
-        {/* Email field */}
-        <div style={{ marginBottom: 16 }}>
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            type="email"
-            {...register("email")}
-            style={{ display: "block", width: "100%" }}
-          />
-          {errors.email && (
-            <span style={{ color: "red" }}>{errors.email.message}</span>
-          )}
-        </div>
-        {/* Terms (checkbox) */}
-        <div style={{ marginBottom: 16 }}>
-          <label htmlFor="terms" style={{ display: "block" }}>
+    <ThemeProvider>
+      <div style={{ maxWidth: 400, margin: "auto" }}>
+        <h1>Simple React Hook Form</h1>
+        <p
+          onMouseEnter={() => setShowInfo(true)}
+          onMouseLeave={() => setShowInfo(false)}
+        >
+          Mas info
+        </p>
+        {showInfo && (
+          <div>
+            Este es un formulario de ejemplo usando React Hook Form y Zod para
+            validación.
+          </div>
+        )}
+        <UserProfile />
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          {/* Name field */}
+          <div style={{ marginBottom: 16 }}>
+            <label htmlFor="name">Name:</label>
             <input
-              id="terms"
-              type="checkbox"
-              {...register("terms")}
-              style={{ marginRight: 8 }}
+              id="name"
+              type="text"
+              {...register("name")}
+              style={{ display: "block", width: "100%" }}
             />
-            Accept terms
-          </label>
-          {errors.terms && (
-            <span style={{ color: "red" }}>{errors.terms.message}</span>
-          )}
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+            {errors.name && (
+              <span style={{ color: "red" }}>{errors.name.message}</span>
+            )}
+          </div>
+          {/* Email field */}
+          <div style={{ marginBottom: 16 }}>
+            <label htmlFor="email">Email:</label>
+            <input
+              id="email"
+              type="email"
+              {...register("email")}
+              style={{ display: "block", width: "100%" }}
+            />
+            {errors.email && (
+              <span style={{ color: "red" }}>{errors.email.message}</span>
+            )}
+          </div>
+          {/* Terms (checkbox) */}
+          <div style={{ marginBottom: 16 }}>
+            <label htmlFor="terms" style={{ display: "block" }}>
+              <input
+                id="terms"
+                type="checkbox"
+                {...register("terms")}
+                style={{ marginRight: 8 }}
+              />
+              Accept terms
+            </label>
+            {errors.terms && (
+              <span style={{ color: "red" }}>{errors.terms.message}</span>
+            )}
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </ThemeProvider>
   );
 }
 
